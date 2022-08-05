@@ -2,45 +2,56 @@
 
 ![](screenshot.png)
 ``` js
-let count = 0;   
-const dset = n => {
-	const dbox = document.querySelector(".dots");
-	let dot = '';
-	for (let d = 0; d < 6; d++) {
-		n > d ? ac = 'on' : ac = '';
-		dot += '<em class="dt '+ac+'"></em>';
+const keypad = {
+	init:function(){
+		this.kset();
+	},
+	cnum: 0,
+	pnum: 8, /* 비번갯수 */
+	dset: function(n){ /* 점들 그리기 */
+		const dbox = document.querySelector(".dots");
+		let dot = '';
+		for(let d = 0; d < this.pnum; d++){
+			n > d ? ac = 'on' : ac = '';
+			dot += '<em class="dt '+ac+'"></em>';
+		}
+		dbox.innerHTML = dot;
+		if( this.cnum >= this.pnum){
+			this.cnum = this.pnum;
+			location.reload();
+		};
+		console.log(this.cnum);
+	},
+	kset: function(c){ /* 번호 그리기 */
+		const kbox = document.querySelector(".keys .box");
+		const norg = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+		const nums = [...norg];
+		const choc = e => nums.splice( Math.floor(Math.random() * nums.length) , 1); /* 랜덤 뽑기 */
+		let bts= '';
+		let bn = '';
+		let bx = '<button type="button" value="del" class="bt">X</button>';
+		let bc = '<button type="button" value="rst" class="bt">reset</button>';
+		for(let i of norg){
+			let pp = choc();
+			let bt = '<button type="button" value="' + pp + '" class="bt">' + pp + '</button>';
+			console.log(i, pp, nums);
+			i == 8 ? bn = bc : null;
+			i == 9 ? bn = bx : null;
+			bts += bt + bn;
+		}
+		kbox.innerHTML = bts;
+		this.dset(0);
+		this.cnum = 0;
+		document.querySelectorAll(".keys .bt").forEach( 
+			el => el.addEventListener("click", e => this.pset(el) )
+		);
+	},
+	pset: function(el){ /* 버튼클릭 */
+		el.value == 'del' ? this.cnum-- : this.cnum++ ;
+		el.value == 'rst' ? this.cnum = 0 : null ;
+		this.cnum < 0 ? this.cnum = 0 : null;
+		this.dset(this.cnum,el.value);
 	}
-	dbox.innerHTML = dot;
-};
-const kset = cc => {
-	const kbox = document.querySelector(".keys .box");
-	const norg = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-	const nums = [...norg];
-	const choc = e => nums.splice( Math.floor(Math.random() * nums.length) , 1);
-	let bts= '';
-	let bn = '';
-	let bx = '<button type="button" onclick="pinput(this);" value="del" class="bt">X</button>';
-	let bc = '<button type="button" onclick="pinput(this);" value="clr" class="bt">Cancel</button>';
-	for(let i of norg){
-		let pp = choc(); /* 뽑기 */
-		let bt = '<button type="button" onclick="pinput(this);" value="' + pp + '" class="bt">' + pp + '</button>';
-		console.log(i, pp, nums);
-		i == 8 ? bn = bc : null;
-		i == 9 ? bn = bx : null;
-		bts += bt + bn;
-	}
-	kbox.innerHTML = bts;
-	dset(0);
-	count = 0;
-};
-kset();
-
-const pinput = el => {
-	['del'].includes( el.value ) ? count-- : count++ ;
-	['clr'].includes( el.value ) ? count = 0 : null ;
-	dset(count);
-	count < 0 ? count = 0 : null;
-	count > 6 ? count = 6 : null;
-	console.log(count);
 }
+keypad.init();
 ```

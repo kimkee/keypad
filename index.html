@@ -59,7 +59,9 @@
             kbox.innerHTML = bts;
             this.dset(0);
             this.cnum = 0;
-            document.querySelectorAll(".keys .bt").forEach( el => el.addEventListener("click", e => this.pset(el) ) );
+            document.querySelectorAll(".keys .bt").forEach( 
+                el => el.addEventListener("click", e => this.pset(el) )
+            );
         },
         pset: function(el){ /* 버튼클릭 */
             el.value == 'del' ? this.cnum-- : this.cnum++ ;
