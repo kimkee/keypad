@@ -18,7 +18,6 @@
         <div class="kbx"></div>
     </div>
 </div>
-<div class="test"> <button onclick="keypad.kset()">Shuffle</button> </div>
 
 <script>
 const keypad = {
@@ -48,11 +47,11 @@ const keypad = {
         const choc = e => nums.splice( Math.floor(Math.random() * nums.length) , 1); /* 랜덤 뽑기 */
         let bts= '';
         let bn = '';
-        let bx = '<button type="button" value="del" class="bt">Del</button>';
-        let bc = '<button type="button" value="rst" class="bt">Reset</button>';
+        let bx = '<button type="button" value="del" class="bt"><i>Del</i></button>';
+        let bc = '<button type="button" value="rst" class="bt"><i>Reset</i></button>';
         for(let i of norg){
             let pp = choc();
-            let bt = '<button type="button" value="' + pp + '" class="bt">' + pp + '</button>';
+            let bt = '<button type="button" value="' + pp + '" class="bt"><i>' + pp + '</i></button>';
             console.log(i, pp, nums);
             i == 8 ? bn = bc : null;
             i == 9 ? bn = bx : null;
@@ -65,7 +64,7 @@ const keypad = {
     },
     pset: function(bt){ /* 버튼클릭 */
         bt.value == 'del' ? this.cnum-- : this.cnum++ ;
-        bt.value == 'rst' ? this.cnum = 0 : null ;
+        bt.value == 'rst' ? this.kset() : null ;
         this.cnum < 0 ? this.cnum = 0 : null;
         this.dset(this.cnum, bt.value);
     },

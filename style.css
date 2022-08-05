@@ -1,17 +1,17 @@
 @charset "utf-8";
 *{box-sizing: border-box; margin: 0; padding: 0;}
 html{}
-body{background-color: #111111;}
-.keypad{max-width: 420px;margin: auto;background: #202020;}
+body{background-color: #202020;}
+.keypad{max-width: 420px;margin: auto;background: #202020;position: fixed;bottom: 0px;right: 0;left: 0;}
 .keypad .dots{display: flex;justify-content: center;flex-direction: column;padding: 30% 0;max-height: 510px;}
-.keypad .dots .txt{text-align: center;color: #999; font-size:18px;margin-bottom: 20px;}
+.keypad .dots .txt{text-align: center;color: #999;font-size: 20px;margin-bottom: 20px;}
 .keypad .dots .dbx{ text-align: center;}
-.keypad .dots .dbx .dt{width: 14px; height: 14px; border-radius: 10px; display: inline-flex;background: #444444; margin: 0 4px;}
-.keypad .dots .dbx .dt.on{background-color: #aaaaaa;}
-.keypad .keys{background-color: #818181;padding: 0;margin: 0px 0px;position: relative;overflow: hidden;max-width: 500px;}
+.keypad .dots .dbx .dt{width: 14px;height: 14px;border-radius: 10px;display: inline-flex;background: #202020;margin: 0 4px;border: #787878 solid 1px;}
+.keypad .dots .dbx .dt.on{background-color: #787878;}
+.keypad .keys{background-color: #818181;padding: 0 0 0px 0;margin: 0px 0px;position: relative;overflow: hidden;max-width: 500px;}
 .keypad .keys .kbx{display: flex; flex-wrap: wrap; margin: -1px -1px -1px -1px;}
-.keypad .keys .kbx .bt{display: flex;width: calc(100% / 3 );height: 70px;background-color: #333333;border: 1px solid #000;border-width: 1px 1px 0px 0px;color: #999999;font-size: 20px;font-family: Consolas;transition: all 0.1s;justify-content: center;align-items: center;line-height: 1;}
-.keypad .keys .kbx .bt:active{background-color: #111111;font-size: 26px;}
-
-.test{margin: 20px 0 0 0;text-align: center;}
-.test button{padding: 10px; background-color: #333333; border: 1px solid #000000; color: #999999; }
+.keypad .keys .kbx .bt{display: flex;width: calc(100% / 3 );padding: 25px 0px;background-color: #333333;border: 1px solid #000;border-width: 1px 1px 0px 0px;color: #999999;font-size: 18px;justify-content: center;align-items: baseline;line-height: 1;}
+.keypad .keys .kbx .bt i{font-family: Consolas;transition: all 0.1s;}
+.keypad .keys .kbx .bt:active{background-color: #111111;}
+.keypad .keys .kbx .bt:active i{transform: scale(1.2);}
+.keypad .keys .kbx .bt:nth-child(9) ~ .bt{padding-bottom: calc( 25px + env(safe-area-inset-bottom) );}
