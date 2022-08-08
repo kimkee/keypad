@@ -31,11 +31,11 @@ const keypad = {
         const choc = e => nums.splice( Math.floor(Math.random() * nums.length) , 1); /* 랜덤 뽑기 */
         let bts= '';
         let bn = '';
-        let bx = '<button type="button" value="del" class="bt"><i>Del</i></button>';
-        let bc = '<button type="button" value="rst" class="bt"><i>Reset</i></button>';
+        let bx = '<button type="button" class="bt del"><i>Del</i></button>';
+        let bc = '<button type="button" class="bt rst"><i>Reset</i></button>';
         for(let i of norg){
             let pp = choc();
-            let bt = '<button type="button" value="' + pp + '" class="bt"><i>' + pp + '</i></button>';
+            let bt = '<button type="button" value="' + pp + '" class="bt num"><i>' + pp + '</i></button>';
             console.log(i, pp, nums);
             i == 8 ? bn = bc : null;
             i == 9 ? bn = bx : null;
@@ -44,15 +44,23 @@ const keypad = {
         kbox.innerHTML = bts;
         this.dset(0);
         this.cnum = 0;
-        kbox.querySelectorAll(".bt").forEach( bt => bt.addEventListener("click", e => this.pset(bt) ) );
+        kbox.querySelectorAll(".bt.num").forEach( bt => bt.addEventListener("click", e => this.pset(bt) ) );
+        kbox.querySelector(".bt.rst").addEventListener("click", e => this.rset() );
+        kbox.querySelector(".bt.del").addEventListener("click", e => this.pdel() );
     },
-    pset: function(bt){ /* 버튼클릭 */
-        bt.value == 'del' ? this.cnum-- : this.cnum++ ;
-        bt.value == 'rst' ? this.kset() : null ;
+    rset: function(){ /* Reset */
+        setTimeout( e => this.kset(), 100);
+    },
+    pdel: function(){ /* Del */
+        this.cnum--;
         this.cnum < 0 ? this.cnum = 0 : null;
+        this.dset(this.cnum);
+    },
+    pset: function(bt){ /* Number */
+        this.cnum++ ;
         this.dset(this.cnum, bt.value);
     },
-    pcom: e => setTimeout( e => location.reload(), 500 )  /* 모두 입력 후 */
+    pcom: e => setTimeout( e => location.reload(), 100 )  /* 모두 입력 후 */
 };
 keypad.init();
 ```
