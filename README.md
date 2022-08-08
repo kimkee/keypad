@@ -13,6 +13,7 @@ const keypad = {
     dset: function(n){ /* 점들 그리기 */
         const dbox = document.querySelector(".dots .dbx");
         let dot = '';
+        let ac  = '';
         for(let d = 0; d < this.pnum; d++){
             n > d ? ac = 'on' : ac = '';
             dot += '<em class="dt '+ac+'"></em>';
@@ -28,12 +29,12 @@ const keypad = {
         const kbox = document.querySelector(".keys .kbx");
         const norg = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         const nums = [...norg];
-        const choc = e => nums.splice( Math.floor(Math.random() * nums.length) , 1); /* 랜덤 뽑기 */
+        const choc = e => nums.splice( Math.floor( Math.random()*nums.length ) , 1)[0]; /* 랜덤 뽑기  arrs.sort( e => Math.random() - 0.5 )  */
         let bts= '';
         let bn = '';
         let bx = '<button type="button" class="bt del"><i>Del</i></button>';
         let bc = '<button type="button" class="bt rst"><i>Reset</i></button>';
-        for(let i of norg){
+        for(let i in norg){
             let pp = choc();
             let bt = '<button type="button" value="' + pp + '" class="bt num"><i>' + pp + '</i></button>';
             console.log(i, pp, nums);
@@ -44,9 +45,11 @@ const keypad = {
         kbox.innerHTML = bts;
         this.dset(0);
         this.cnum = 0;
-        kbox.querySelectorAll(".bt.num").forEach( bt => bt.addEventListener("click", e => this.pset(bt) ) );
-        kbox.querySelector(".bt.rst").addEventListener("click", e => this.rset() );
-        kbox.querySelector(".bt.del").addEventListener("click", e => this.pdel() );
+        kbox.querySelectorAll(".bt").forEach( bt => bt.addEventListener("click", e => {
+            bt.classList.contains("num") && this.pset(bt);
+            bt.classList.contains("rst") && this.rset(bt);
+            bt.classList.contains("del") && this.pdel(bt);
+        }));
     },
     rset: function(){ /* Reset */
         setTimeout( e => this.kset(), 100);
@@ -62,5 +65,6 @@ const keypad = {
     },
     pcom: e => setTimeout( e => location.reload(), 100 )  /* 모두 입력 후 */
 };
-keypad.init();
+
+document.addEventListener('DOMContentLoaded', e => keypad.init() );
 ```

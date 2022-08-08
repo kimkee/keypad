@@ -29,6 +29,7 @@ const keypad = {
     dset: function(n){ /* 점들 그리기 */
         const dbox = document.querySelector(".dots .dbx");
         let dot = '';
+        let ac  = '';
         for(let d = 0; d < this.pnum; d++){
             n > d ? ac = 'on' : ac = '';
             dot += '<em class="dt '+ac+'"></em>';
