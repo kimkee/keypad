@@ -5,7 +5,7 @@ body{background-color: #202020;}
 .keypad{max-width: 420px;margin: auto;background: #161616;position: fixed;bottom: 0px;right: 0;left: 0;height: 100%;display: flex;flex-direction: column;justify-content: space-between;}
 .keypad .dots{display: flex;justify-content: center;flex-direction: column;height: calc(100% - 270px - env(safe-area-inset-bottom));}
 .keypad .dots .txt{text-align: center;color: #999;font-size: 20px;margin-bottom: 20px;}
-.keypad .dots .dbx{ text-align: center;}
+.keypad .dots .dbx{text-align: center;display: flex;justify-content: center;}
 .keypad .dots .dbx .dt{width: 14px;height: 14px;border-radius: 10px;display: inline-flex;background: #202020;margin: 0 4px;border: #787878 solid 1px;}
 .keypad .dots .dbx .dt.on{background-color: #787878;}
 .keypad .keys{background-color: #818181;padding: 0 0 0px 0;margin: 0px 0px;position: relative;overflow: hidden;max-width: 500px;/* height: 50%; */width: 100%;}
