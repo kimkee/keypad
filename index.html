@@ -13,6 +13,7 @@
     <div class="dots">
         <div class="txt">PIN</div>
         <div class="dbx"></div>
+        <input type="number" class="pwds">
     </div>
     <div class="keys">
         <div class="kbx"></div>
@@ -26,20 +27,29 @@ const keypad = {
     },
     cnum: 0,
     pnum: 6, /* 비번갯수 */
-    dset: function(n){ /* 점들 그리기 */
+    input: document.querySelector("input.pwds"), /* 비번필드 */
+    dset: function(n,v){ /* 점들 그리기 */
         const dbox = document.querySelector(".dots .dbx");
         let dot = '';
         let ac  = '';
+        if(v != null){
+            this.input.value = this.input.value + v;
+        }
         for(let d = 0; d < this.pnum; d++){
-            n > d ? ac = 'on' : ac = '';
-            dot += '<em class="dt '+ac+'"></em>';
+            n > d ? ac = ' on' : ac = '';
+            dot += '<em class="dt'+ac+'">'+ this.input.value.charAt(d)+'</em>';
         }
         dbox.innerHTML = dot;
-        if( this.cnum >= this.pnum){
+        if( n > 0 ){
+            const ldt = dbox.querySelectorAll(".dt.on").length;
+            dbox.querySelector(".dt:nth-child("+ldt+")").classList.add("act");
+        }
+        
+        if( this.cnum >= this.pnum ){
             this.cnum = this.pnum;
             this.pcom();
         };
-        console.log(this.cnum);
+        console.log(n, v, this.input.value);
     },
     kset: function(c){ /* 번호 그리기 */
         const kbox = document.querySelector(".keys .kbx");
@@ -59,7 +69,7 @@ const keypad = {
             bts += bt + bn;
         }
         kbox.innerHTML = bts;
-        this.dset(0);
+        this.dset(0,null);
         this.cnum = 0;
         kbox.querySelectorAll(".bt").forEach( bt => bt.addEventListener("click", e => {
             bt.classList.contains("num") && this.pset(bt);
@@ -68,18 +78,20 @@ const keypad = {
         }));
     },
     rset: function(){ /* Reset */
+        this.input.value = '';
         setTimeout( e => this.kset(), 100);
     },
     pdel: function(){ /* Del */
         this.cnum--;
         this.cnum < 0 ? this.cnum = 0 : null;
-        this.dset(this.cnum);
+        this.input.value = this.input.value.slice(0, -1);
+        this.dset(this.cnum ,null);
     },
     pset: function(bt){ /* Number */
         this.cnum++ ;
         this.dset(this.cnum, bt.value);
     },
-    pcom: e => setTimeout( e => location.reload(), 100 )  /* 모두 입력 후 */
+    pcom: e => setTimeout( e => location.reload(), 200 )  /* 모두 입력 후 */
 };
 
 document.addEventListener('DOMContentLoaded', e => keypad.init() );
