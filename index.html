@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shuffle KEYPAD</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css?v=1">
 </head>
 <body>
 
@@ -27,17 +27,17 @@ const keypad = {
     },
     cnum: 0,
     pnum: 6, /* 비번갯수 */
-    input: document.querySelector("input.pwds"), /* 비번필드 */
+    pwds: document.querySelector("input.pwds"), /* 비번필드 */
     dset: function(n,v){ /* 점들 그리기 */
         const dbox = document.querySelector(".dots .dbx");
         let dot = '';
         let ac  = '';
         if(v != null){
-            this.input.value = this.input.value + v;
+            this.pwds.value = this.pwds.value + v;
         }
         for(let d = 0; d < this.pnum; d++){
             n > d ? ac = ' on' : ac = '';
-            dot += '<em class="dt'+ac+'">'+ this.input.value.charAt(d)+'</em>';
+            dot += '<em class="dt'+ac+'">'+ this.pwds.value.charAt(d)+'</em>';
         }
         dbox.innerHTML = dot;
         if( n > 0 ){
@@ -49,7 +49,7 @@ const keypad = {
             this.cnum = this.pnum;
             this.pcom();
         };
-        console.log(n, v, this.input.value);
+        console.log(n, v, this.pwds.value);
     },
     kset: function(c){ /* 번호 그리기 */
         const kbox = document.querySelector(".keys .kbx");
@@ -78,13 +78,13 @@ const keypad = {
         }));
     },
     rset: function(){ /* Reset */
-        this.input.value = '';
+        this.pwds.value = '';
         setTimeout( e => this.kset(), 100);
     },
     pdel: function(){ /* Del */
         this.cnum--;
         this.cnum < 0 ? this.cnum = 0 : null;
-        this.input.value = this.input.value.slice(0, -1);
+        this.pwds.value = this.pwds.value.slice(0, -1);
         this.dset(this.cnum ,null);
     },
     pset: function(bt){ /* Number */
