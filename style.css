@@ -2,11 +2,11 @@
 *{box-sizing: border-box; margin: 0; padding: 0;}
 html{}
 body{background-color: #202020;}
-.keypad{max-width: 420px;margin: auto;background: #161616;position: fixed;bottom: 0px;right: 0;left: 0;height: 100%;display: flex;flex-direction: column;justify-content: space-between;font-family: Consolas;}
+.keypad{max-width: 420px;margin: auto;background: #161616;position: fixed;bottom: 0px;right: 0;left: 0;height: 100%;display: flex;flex-direction: column;justify-content: space-between;/* font-family: Consolas; */}
 .keypad .dots{display: flex;position: relative;justify-content: center;flex-direction: column;height: calc(100% - 270px - env(safe-area-inset-bottom));}
 .keypad .dots .txt{text-align: center;color: #999;font-size: 20px;margin-bottom: 20px;}
 .keypad .dots .dbx{text-align: center;display: flex;justify-content: center;}
-.keypad .dots .dbx .dt{width: 18px;height: 18px;font-style: normal;color: #000000;border-radius: 10px;display: inline-flex;background: #202020;margin: 0 4px;border: #787878 solid 1px;font-size: 14px;justify-content: center;align-items: center;}
+.keypad .dots .dbx .dt{width: 18px;height: 18px;font-style: normal;color: #000000;border-radius: 10px;display: inline-flex;background: #202020;margin: 0 4px;border: #787878 solid 1px;font-size: 13px;justify-content: center;align-items: center;}
 .keypad .dots .dbx .dt.on{background-color: #787878;color: #787878;}
 .keypad .dots .dbx .dt.act{color: #000000;background-color: #787878;}
 .keypad .keys{background-color: #818181;padding: 0 0 0px 0;margin: 0px 0px;position: relative;overflow: hidden;max-width: 500px;/* height: 50%; */width: 100%;}
@@ -16,4 +16,4 @@ body{background-color: #202020;}
 .keypad .keys .kbx .bt:active{background-color: #111111;}
 .keypad .keys .kbx .bt:active i{transform: scale(1.2);}
 .keypad .keys .kbx .bt:nth-child(9) ~ .bt{padding-bottom: calc( 25px + env(safe-area-inset-bottom) );}
-.keypad .pwds{position: absolute;left: 0;bottom: 30px;background: transparent;border: none;font-size: 24px;letter-spacing: 10px;color: #404040;width: 100%;text-align: center;pointer-events: none;padding: 0px 0px 0px 12px;}
+.keypad .pwds{position: absolute;left: 0;bottom: 30px;background: transparent;border: none;font-size: 24px;letter-spacing: 10px;color: #404040;width: 100%;text-align: center;pointer-events: none;padding: 0px 0px 0px 12px;opacity: 0;}
