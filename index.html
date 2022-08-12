@@ -55,7 +55,8 @@ const keypad = {
         const kbox = document.querySelector(".keys .kbx");
         const norg = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         const nums = [...norg];
-        const choc = e => nums.splice( Math.floor( Math.random()*nums.length ) , 1)[0]; /* 랜덤 뽑기  arrs.sort( e => Math.random() - 0.5 )  */
+        /* 랜덤 뽑기  arrs.sort( e => Math.random() - 0.5 )  */
+        const choc = e => nums.splice( Math.floor( Math.random()*nums.length ) , 1)[0];
         let bts= '';
         let bn = '';
         let bx = '<button type="button" class="bt del"><i>Del</i></button>';
