@@ -72,24 +72,24 @@ const keypad = {
     },
     pcom: e => setTimeout( e => location.reload(), 200 ),  /* 모두 입력 후 */
     gohub:{
-		init: function(){
-			this.evt();	
-		},
-		evt: function(){
-			document.addEventListener("keydown", e => e.code == "F2" ? this.set() : null );
-		},
-		set: function(){
+        init: function(){
+            this.evt();	
+        },
+        evt: function(){
+            document.addEventListener("keydown", e => e.code == "F2" ? this.set() : null );
+        },
+        set: function(){
             const l = location;
             const t = ["127.0.0.1","localhost","192.168.0.55"].includes(l.hostname);
-			const k = { 
+            const k = { 
                 m: ["127.0.0.1:9002","http:"],
                 p: ["kimkee.github.io","https:"]
             };
-			t ? l.href = l.href.replace(l.host, k.p[0]).replace(l.protocol, k.p[1])
-              : l.href = l.href.replace(l.host, k.m[0]).replace(l.protocol, k.m[1]);
+            t ? l.href = l.href.replace(l.host, k.p[0]).replace(l.protocol, k.p[1])
+            : l.href = l.href.replace(l.host, k.m[0]).replace(l.protocol, k.m[1]);
             
-		}
-	},
+        }
+    },
 };
 
 document.addEventListener('DOMContentLoaded', keypad.init() );
