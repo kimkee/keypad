@@ -87,7 +87,6 @@ const keypad = {
             };
             t ? l.href = l.href.replace(l.host, k.p[0]).replace(l.protocol, k.p[1])
             : l.href = l.href.replace(l.host, k.m[0]).replace(l.protocol, k.m[1]);
-            
         }
     },
 };
